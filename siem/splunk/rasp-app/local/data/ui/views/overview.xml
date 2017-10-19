@@ -14,7 +14,7 @@
       <title>被攻击域名</title>
       <table>
         <search>
-          <query>target | chart sparkline count by target | sort -count | rename target as 被攻击域名 sparkline as 攻击趋势 count as 攻击次数</query>
+          <query>target | search event_type="attack" | chart sparkline count by target | sort -count | rename target as 被攻击域名 sparkline as 攻击趋势 count as 攻击次数</query>
           <earliest>$time_tok.earliest$</earliest>
           <latest>$time_tok.latest$</latest>
         </search>
@@ -29,7 +29,7 @@
       <title>攻击来源</title>
       <table>
         <search>
-          <query>attack_source| chart sparkline count by attack_source| sort -count | rename attack_source as 攻击来源 sparkline as 攻击趋势 count as 攻击次数</query>
+          <query>attack_source | search event_type="attack" | chart sparkline count by attack_source| sort -count | rename attack_source as 攻击来源 sparkline as 攻击趋势 count as 攻击次数</query>
           <earliest>$time_tok.earliest$</earliest>
           <latest>$time_tok.latest$</latest>
         </search>
@@ -46,7 +46,7 @@
       <title>攻击URL</title>
       <chart>
         <search>
-          <query>url | top limit=10 url | rename url as "域名" | sort count</query>
+          <query>url | search event_type="attack" | top limit=10 url | rename url as "域名" | sort count</query>
           <earliest>$time_tok.earliest$</earliest>
           <latest>$time_tok.latest$</latest>
           <refresh>1m</refresh>
@@ -59,7 +59,7 @@
       <title>攻击参数</title>
       <chart>
         <search>
-          <query>attack_params  | top limit=10 attack_params| rename attack_params as "参数" | sort count</query>
+          <query>attack_params  | search event_type="attack" | top limit=10 attack_params| rename attack_params as "参数" | sort count</query>
           <earliest>$time_tok.earliest$</earliest>
           <latest>$time_tok.latest$</latest>
         </search>
@@ -72,7 +72,7 @@
       <title>攻击类型分布</title>
       <chart>
         <search>
-          <query>attack_type | stats count by attack_type| sort count</query>
+          <query>attack_type | search event_type="attack" | stats count by attack_type| sort count</query>
           <earliest>$time_tok.earliest$</earliest>
           <latest>$time_tok.latest$</latest>
         </search>
@@ -105,7 +105,7 @@
       <title>User-Agent分布</title>
       <chart>
         <search>
-          <query>user_agent  | stats count by user_agent | sort count</query>
+          <query>user_agent | search event_type="attack"  | stats count by user_agent | sort count</query>
           <earliest>$time_tok.earliest$</earliest>
           <latest>$time_tok.latest$</latest>
         </search>
@@ -138,7 +138,7 @@
       <title>应用类型分布</title>
       <chart>
         <search>
-          <query>server_type  | stats count by server_type | sort count</query>
+          <query>server_type | search event_type="attack"  | stats count by server_type | sort count</query>
           <earliest>$time_tok.earliest$</earliest>
           <latest>$time_tok.latest$</latest>
         </search>
