@@ -1,7 +1,7 @@
 <form>
   <label>攻击事件</label>
   <search id="global">
-    <query>`modsec_alert` event_type=attack attack_source="$source_tok$"  target="$target_tok$" url="$url_tok$" attack_params="$attack_params_tok$" server_type="$server_type_tok$" intercept_state="$intercept_state_tok$" attack_type="$attack_type_tok$" plugin_name="$plugin_name_tok$" search attack_source="$source_tok$"  target="$target_tok$" url="$url_tok$" attack_params="$attack_params_tok$" server_type="$server_type_tok$" intercept_state="$intercept_state_tok$" attack_type="$attack_type_tok$" plugin_name="$plugin_name_tok$"  | table _time attack_source  target url attack_params server_type intercept_state attack_type plugin_name</query>
+    <query>`modsec_alert` attack_source="$source_tok$"  target="$target_tok$" url="$url_tok$" attack_params="$attack_params_tok$" server_type="$server_type_tok$" intercept_state="$intercept_state_tok$" attack_type="$attack_type_tok$" plugin_name="$plugin_name_tok$" search attack_source="$source_tok$"  target="$target_tok$" url="$url_tok$" attack_params="$attack_params_tok$" server_type="$server_type_tok$" intercept_state="$intercept_state_tok$" attack_type="$attack_type_tok$" plugin_name="$plugin_name_tok$"  | table _time attack_source  target url attack_params server_type intercept_state attack_type plugin_name</query>
     <earliest>$time_tok.earliest$</earliest>
     <latest>$time_tok.latest$</latest>
   </search>
@@ -75,7 +75,7 @@
       <title>告警信息</title>
       <table>
         <search>
-          <query>| search event_type="attack" attack_source="$source_tok$"  target="$target_tok$" 
+          <query>| search event_type="attack"  attack_source="$source_tok$"  target="$target_tok$" 
 url="$url_tok$" 
 attack_params="$attack_params_tok$" 
 server_type="$server_type_tok$"
@@ -86,9 +86,10 @@ attack_type="$attack_type_tok$" plugin_name="$plugin_name_tok$"  |  eval 攻击�
         </search>
         <option name="count">20</option>
         <option name="drilldown">cell</option>
+        <option name="refresh.display">progressbar</option>
         <drilldown>
           <link target="_blank">
-            <![CDATA[search?form.action_tok=blocked&form.time_tok.earliest=$time_tok.earliest$&form.time_tok.latest=$time_tok.latest$&q=| search event_type="attack" attack_source="$source_tok$"  target="$target_tok$" 
+            <![CDATA[search?form.action_tok=blocked&form.time_tok.earliest=$time_tok.earliest$&form.time_tok.latest=$time_tok.latest$&q=| search attack_source="$source_tok$"  target="$target_tok$" 
 url="$url_tok$" 
 attack_params="$attack_params_tok$" 
 server_type="$server_type_tok$"
